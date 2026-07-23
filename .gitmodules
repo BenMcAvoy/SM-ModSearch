@@ -1,0 +1,3 @@
+[submodule "vendor/mygui-src"]
+	path = vendor/mygui-src
+	url = https://github.com/AxolotGames/mygui.git

@@ -1,0 +1,83 @@
+; Import definitions for MyGUIEngine.dll (Scrap Mechanic's Axolot MyGUI fork).
+; MyGUIEngine.dll ships without an import .lib, so we build one from this
+; .def (via lib.exe) containing exactly the mangled exports SM-ModSearch
+; calls. Names were pulled from ScrapMechanic.exe's import table (IDA).
+LIBRARY MyGUIEngine.dll
+EXPORTS
+    ; MyGUI::Gui
+    ?getInstancePtr@?$Singleton@VGui@MyGUI@@@MyGUI@@SAPEAVGui@2@XZ
+    ?createWidgetT@Gui@MyGUI@@QEAAPEAVWidget@2@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0AEBU?$TCoord@H@types@2@UAlign@2@00@Z
+    ?findWidgetT@Gui@MyGUI@@QEAAPEAVWidget@2@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z
+
+    ; MyGUI::Widget
+    ?createWidgetT@Widget@MyGUI@@QEAAPEAV12@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0AEBU?$TCoord@H@types@2@UAlign@2@0@Z
+    ?getParent@Widget@MyGUI@@QEBAPEAV12@XZ
+    ?findWidget@Widget@MyGUI@@QEAAPEAV12@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+    ?getChildAt@Widget@MyGUI@@QEAAPEAV12@_K@Z
+    ?getChildCount@Widget@MyGUI@@QEAA_KXZ
+    ?getName@Widget@MyGUI@@QEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+    ?setCoord@Widget@MyGUI@@QEAAXHHHH@Z
+    ?setCoord@Widget@MyGUI@@UEAAXAEBU?$TCoord@H@types@2@@Z
+    ?setPosition@Widget@MyGUI@@QEAAXHH@Z
+    ?setSize@Widget@MyGUI@@QEAAXHH@Z
+    ?setVisible@Widget@MyGUI@@UEAAX_N@Z
+    ?setEnabled@Widget@MyGUI@@UEAAX_N@Z
+    ?getClassTypeName@Widget@MyGUI@@SAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+
+    ; MyGUI::TextBox
+    ?getCaption@TextBox@MyGUI@@UEAAAEBVUString@2@XZ
+
+    ; MyGUI::EditBox
+    ?getCaption@EditBox@MyGUI@@UEAAAEBVUString@2@XZ
+    ?getOnlyText@EditBox@MyGUI@@QEAA?AVUString@2@XZ
+    ?setCaption@EditBox@MyGUI@@UEAAXAEBVUString@2@@Z
+    ?setTextAlign@EditBox@MyGUI@@UEAAXUAlign@2@@Z
+    ?setTextColour@EditBox@MyGUI@@UEAAXAEBUColour@2@@Z
+    ?setFontName@EditBox@MyGUI@@UEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+
+    ; MyGUI::Colour
+    ??0Colour@MyGUI@@QEAA@MMMM@Z
+
+    ; MyGUI::ImageBox
+    ?getClassTypeName@ImageBox@MyGUI@@SAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+    ?setImageTexture@ImageBox@MyGUI@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+
+    ; MyGUI::ItemBox
+    ?getItemCount@ItemBox@MyGUI@@QEBA_KXZ
+    ?getWidgetByIndex@ItemBox@MyGUI@@QEAAPEAVWidget@2@_K@Z
+    ?removeItemAt@ItemBox@MyGUI@@QEAAX_K_N@Z
+    ?removeAllItems@ItemBox@MyGUI@@QEAAXXZ
+    ?redrawAllItems@ItemBox@MyGUI@@QEAAXXZ
+    ?setCoord@ItemBox@MyGUI@@QEAAXHHHH@Z
+    ?addItem@ItemBox@MyGUI@@QEAAXVAny@2@_N@Z
+
+    ; MyGUI::Any
+    ??0Any@MyGUI@@QEAA@XZ
+    ??0Any@MyGUI@@QEAA@AEBV01@@Z
+    ??1Any@MyGUI@@QEAA@XZ
+    ??4Any@MyGUI@@QEAAAEAV01@AEBV01@@Z
+
+    ; MyGUI::UString
+    ??0UString@MyGUI@@QEAA@XZ
+    ??0UString@MyGUI@@QEAA@PEBD@Z
+    ??0UString@MyGUI@@QEAA@AEBV01@@Z
+    ??1UString@MyGUI@@QEAA@XZ
+    ??4UString@MyGUI@@QEAAAEAV01@AEBV01@@Z
+    ??BUString@MyGUI@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+    ?asUTF8@UString@MyGUI@@QEBAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+
+    ; MyGUI::EditBox
+    ?getClassTypeName@EditBox@MyGUI@@SAAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+
+    ; Pulled in transitively by MYGUI_ASSERT/EventPair machinery even though
+    ; the asserting branches are never taken at runtime -- still needed at
+    ; link time because they're referenced from inline template bodies.
+    ??0Exception@MyGUI@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0PEBDJ@Z
+    ??0Exception@MyGUI@@QEAA@AEBV01@@Z
+    ??1Exception@MyGUI@@QEAA@XZ
+    ??0LogStream@MyGUI@@QEAA@XZ
+    ??1LogStream@MyGUI@@QEAA@XZ
+    ??6LogStream@MyGUI@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBUEnd@01@@Z
+    ??0LogLevel@MyGUI@@QEAA@W4Enum@01@@Z
+    ?getInstance@LogManager@MyGUI@@SAAEAV12@XZ
+    ?log@LogManager@MyGUI@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ULogLevel@2@0PEBDH@Z
